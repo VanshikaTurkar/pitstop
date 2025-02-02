@@ -1,0 +1,109 @@
+const PitStop = require("../models/pitStopModel");
+
+const createPitStop = async (req, res) => {
+    try {
+        const pitStop = new PitStop(req.body);
+        await pitStop.save(function(err,result){
+            if (err){
+                console.log(err);
+            }
+            else{
+                console.log(result)
+            }
+        });
+        res.status(201).json({
+          status: "success",
+          message: "PitStop successfully created.",
+          data: pitStop
+        });
+      } catch (err) {
+        console.error(err);
+        res.status(500).json({
+          status: "failure",
+          message: "Server-side error: pitstop could not be created.",
+          data: {}
+        });
+      }
+    // console.log("req.body", req.body); // For debugging the incoming request body
+    // const newPitStop = new PitStop(req.body);
+    // try {
+    //     // Save the pit stop to the database without passing the instance as an argument
+    //     console.log("newPitStop before");
+    //     const data = await newPitStop.save();
+    //     console.log("data", data); // Just call save() without passing the object
+
+    //     res.status(201).json({
+    //         status: "success",
+    //         message: "PitStop successfully created.",
+    //         data: data
+    //     });
+    // } catch (err) {
+    //     console.error(err);
+    //     res.status(500).json({
+    //         status: "failure",
+    //         message: "Server-side error: pitstop could not be created.",
+    //         data: {}
+    //     });
+    // }
+};
+
+const editPitStopDetails = async (req, res) => {
+    const pitstopId = req.params.id;
+    const updateInput = req.body;
+
+    try {
+        const result = await Organization.updateOne( {id: pitstopId}, { $set: updateInput});
+
+        if (result.modifiedCount === 0) {
+            res.status(404).json({
+                status: "failure",
+                message: "PitStop not found or no changes made.",
+                data: result
+            });
+        } else {
+            res.status(200).json({
+                status: "success",
+                message: "PitStop updated successfully.",
+                data: result
+            });
+        }
+    } catch (err) {
+        res.status(500).json({
+            status: "failure",
+            message: "Server-side error: update not completed.",
+            data: {}
+        });
+    }
+};
+
+const getPitStopByFilter = async (req, res) => {
+    try {
+    const pitStopByFilter = await PitStop.find( req.body );
+    if (orgByFilter) {
+        res.status(200).json({
+            status: "success",
+            message: "Organization(s) successfully retrieved",
+            data: orgByFilter
+        });
+    }
+    else {
+        res.status(404).json({
+            status: "failure",
+            message: "Organization not found.",
+            data: {}
+        });
+    }
+    } catch (err) {
+        res.status(500).json({
+            status: "failure",
+            message: "Server-side error: could not find organization by attribute.",
+            data: {}
+        });
+    }
+};
+
+module.exports = {
+    createPitStop,
+    getPitStopByFilter,
+    editPitStopDetails
+};
