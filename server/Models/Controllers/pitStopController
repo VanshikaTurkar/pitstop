@@ -71,21 +71,21 @@ const editPitStopDetails = async (req, res) => {
 
 const getPitStopByFilter = async (req, res) => {
     try {
-    const pitStopByFilter = await PitStop.find( req.body );
-    if (orgByFilter) {
+        const { AllDayAccess, LGBTQfriendly, wheelChairFriendly } = req.body;
+        console.log("req.body", req.body);
+        const filter = {};
+        // if (AllDayAccess) filter.AllDayAccess = AllDayAccess;
+        // if (LGBTQfriendly) filter.LGBTQfriendly = LGBTQfriendly;
+        // if (wheelChairFriendly) filter.wheelChairFriendly = wheelChairFriendly
+        console.log("filter", filter);
+        const pitStopByFilter = await PitStop.find(req.body);
+        console.log("pitStopByFilter", pitStopByFilter);
+    
         res.status(200).json({
             status: "success",
             message: "Organization(s) successfully retrieved",
-            data: orgByFilter
+            data: pitStopByFilter
         });
-    }
-    else {
-        res.status(404).json({
-            status: "failure",
-            message: "Organization not found.",
-            data: {}
-        });
-    }
     } catch (err) {
         res.status(500).json({
             status: "failure",
@@ -94,7 +94,6 @@ const getPitStopByFilter = async (req, res) => {
         });
     }
 };
-
 module.exports = {
     createPitStop,
     getPitStopByFilter,

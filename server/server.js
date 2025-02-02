@@ -63,6 +63,7 @@ app.use(express.json());
 //   next();
 // });
 app.use('/create', pitStopRouter);
+app.use('/filter', pitStopRouter);
 
 // API Routes
 //app.use('/pitstop', pitStopRouter); 
