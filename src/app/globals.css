@@ -1,5 +1,5 @@
 :root {
-  --background: #ffffff;
+  --background: #b8cc90;
   --foreground: #171717;
 }
 
@@ -39,4 +39,87 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2.5rem;
+  margin: 2rem 0;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 25px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-left: 20px;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  background-color: #2980b9;
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.location-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.location-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  color: var(--foreground);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.rating-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--foreground);
+  margin: 2rem 0 1.5rem;
+  text-align: center;
+  letter-spacing: 0.3px;
+}
+
+.rating-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  margin-top: 1rem;
+}
+
+.location-image {
+  width: 100%;
+  height: 400px; /* Increased height for better visibility */
+  object-fit: cover;
+  border-radius: 10px;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.location-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }

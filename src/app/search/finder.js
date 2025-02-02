@@ -42,19 +42,19 @@ const PitStop = () => {
     }
   ];
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      try {
-        const response = await fetch("/api/locations"); // Call the API route
-        const data = await response.json();
-        setLocations(data); // Update state with fetched data
-      } catch (error) {
-        console.error("Error fetching locations:", error);
-      }
-    };
+  // // useEffect(() => {
+  // //   const fetchLocations = async () => {
+  // //     try {
+  // //       const response = await fetch("/api/locations"); // Call the API route
+  // //       const data = await response.json();
+  // //       setLocations(data); // Update state with fetched data
+  // //     } catch (error) {
+  // //       console.error("Error fetching locations:", error);
+  // //     }
+  // //   };
 
-    fetchLocations();
-  }, []);
+  //   fetchLocations();
+  // }, []);
 
   return (
     <div className="max-w-4xl mx-auto p-4">
