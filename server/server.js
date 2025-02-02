@@ -27,21 +27,30 @@ const pitStopRouter = require('./Models/Routes/pitStopRoutes.js');
 const uri = process.env.MONGODB_URI;
 const port = process.env.PORT;
 // Replace the following with your Atlas connection string                                                                                                                                        
-const url = "mongodb+srv://vanshikaturkar:vturkar@cluster.mongodb.net/Pitstops?retryWrites=true&w=majority";
-// Connect to your Atlas cluster
-const client = new MongoClient(url);
-async function run() {
-    try {
-        await client.connect();
-        console.log("Successfully connected to Atlas", );
-    } catch (err) {
-        console.log(err.stack);
-    }
-    finally {
-        await client.close();
-    }
-}
-run().catch(console.dir);
+//const url = "mongodb+srv://vanshikaturkar:vturkar@base-cluster.lqlri.mongodb.net/Pitstops?retryWrites=true&w=majority";
+// // Connect to your Atlas cluster
+// const client = new MongoClient(url);
+// async function run() {
+//     try {
+//         await client.connect();
+//         console.log("Successfully connected to Atlas", );
+//     } catch (err) {
+//         console.log(err.stack);
+//     }
+//     finally {
+//         await client.close();
+//     }
+// }
+// run().catch(console.dir);
+// Connect to the MongoDB database
+async function connectToDatabase() {
+    mongoose.connect(uri)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('MongoDB connection error:', err));
+  }
+  
+  connectToDatabase();
+  
 
 // Start the Node Express server
 const app = express(); //define app using express, defines handlers
@@ -49,38 +58,38 @@ app.use(cors());
 app.use(express.json());
 
 // Log all incoming requests
-app.use((req, res, next) => {
-  console.log('Incoming request:', req.method, req.path);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Incoming request:', req.method, req.path);
+//   next();
+// });
+app.use('/create', pitStopRouter);
 
 // API Routes
-app.use('/pitstop', pitStopRouter); 
+//app.use('/pitstop', pitStopRouter); 
 
 // Test route
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
 
 // Your pitstop route
-app.post('/api/pitstops/createPitStop', (req, res) => {
-  console.log('Received pitstop data:', req.body);
-  res.json({ 
-    status: "success",
-    message: "PitStop received",
-    data: req.body 
-  });
-});
+// app.post('/api/pitstops/createPitStop', (req, res) => {
+//   console.log('Received pitstop data:', req.body);
+//   res.json({ 
+//     status: "success",
+//     message: "PitStop received",
+//     data: req.body 
+//   });
+// });
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// // MongoDB connection
+// mongoose.connect(process.env.MONGODB_URI)
+//   .then(() => console.log('Connected to MongoDB'))
+//   .catch(err => console.error('MongoDB connection error:', err));
 
-// Start server
-const PORT = 3001;
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
   console.log('Available routes:');
   console.log('- GET /');
   console.log('- POST /api/pitstops/createPitStop');

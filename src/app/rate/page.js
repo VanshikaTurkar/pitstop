@@ -1,5 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
+import 'leaflet/dist/leaflet.css';
 import EventTagManager from './rate';
 export default function Home() {
   const router = useRouter();

@@ -3,14 +3,7 @@ const PitStop = require("../models/pitStopModel");
 const createPitStop = async (req, res) => {
     try {
         const pitStop = new PitStop(req.body);
-        await pitStop.save(function(err,result){
-            if (err){
-                console.log(err);
-            }
-            else{
-                console.log(result)
-            }
-        });
+        await pitStop.save();
         res.status(201).json({
           status: "success",
           message: "PitStop successfully created.",

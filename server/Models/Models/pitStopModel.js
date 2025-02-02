@@ -38,4 +38,4 @@ const pitStopSchema = new mongoose.Schema({
     },
 });
 
-module.exports = mongoose.model('pit-stops', pitStopSchema);
+module.exports = mongoose.model('PitStop', pitStopSchema, 'pit-stops');

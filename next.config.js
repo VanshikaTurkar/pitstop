@@ -1,14 +1,10 @@
 /** @type {import('next').NextConfig} */
-
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:3001/api/:path*'
-      }
-    ]
-  }
-}
+  // Config options here
+  env: {
+    IP_ADDRESS: "192.168.1.113",
+    PORT: "4000",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
